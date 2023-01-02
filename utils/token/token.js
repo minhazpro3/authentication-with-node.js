@@ -5,7 +5,7 @@ exports.generateToken = (info) => {
   };
 
   const token = jwt.sign(payload, process.env.sk_token, {
-    expiresIn: "20",
+    expiresIn: "120s",
   });
 
   return token;

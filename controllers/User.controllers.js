@@ -47,8 +47,9 @@ exports.login = async (req, res) => {
     }
 
     const token = generateToken(user);
+    console.log(token);
 
-    const { password: pass, ...others } = user.toObject();
+    const { pass, ...others } = user.toObject();
 
     if (token) {
       res.status(200).json({
@@ -67,4 +68,14 @@ exports.login = async (req, res) => {
       error: error,
     });
   }
+};
+
+exports.dashboard = async (req, res) => {
+  const result = await User.findOne({ email: req.user?.email }).select(
+    "-password"
+  );
+  res.send({
+    status: "success",
+    data: result,
+  });
 };

@@ -1,8 +1,10 @@
 const express = require("express");
-const authenticate = require("../../controllers/user.controllers");
+const authenticates = require("../../controllers/user.controllers");
+const { authenticate } = require("../../utils/middleware/authenticate");
 const router = express.Router();
 
-router.route("/register").post(authenticate.register);
-router.route("/login").post(authenticate.login);
+router.route("/register").post(authenticates.register);
+router.route("/login").post(authenticates.login);
+router.route("/dashboard").get(authenticate, authenticates.dashboard);
 
 module.exports = router;
